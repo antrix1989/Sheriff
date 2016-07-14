@@ -14,7 +14,7 @@
  * The number currently set as the badge value for the view.
  * @note The badge will be visible if this number is greater than zero. Setting the `badgeValue` to a negative number will set it to zero and hide the label.
  */
-@property (nonatomic) NSInteger badgeValue;
+@property (nonatomic) NSString *badgeValue;
 
 
 /**
@@ -33,17 +33,5 @@
  */
 @property (nonatomic) CGFloat topOffset;
 @property (nonatomic) CGFloat rightOffset;
-
-/**
- * Increment the badge value, which will result in the badge being displayed if the current value is zero.
- */
-- (void)increment;
-
-
-/**
- * Decrement the badge value, which will result in the badge being hidden if the new value is zero.
- * @note Calling `decrement` when the value is currently zero will have no effect.
- */
-- (void)decrement;
 
 @end

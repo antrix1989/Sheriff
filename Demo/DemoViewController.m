@@ -16,9 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(decrement)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(increment)];
+//
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(decrement)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(increment)];
 
     self.logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gemr"]];
     self.logoImageView.clipsToBounds = NO;
@@ -42,48 +42,48 @@
 
 #pragma mark - Actions
 
-- (void)increment {
-    if (self.badgeView.badgeValue == 5) {
-        [self.badgeView setBadgeValue:10];
-    }
-
-    else if (self.badgeView.badgeValue == 15) {
-        [self.badgeView setBadgeValue:100];
-    }
-
-    else if (self.badgeView.badgeValue == 105) {
-        [self.badgeView setBadgeValue:1000];
-    }
-
-    else if (self.badgeView.badgeValue == 1005) {
-        [self.badgeView setBadgeValue:10000];
-    }
-
-    else {
-        [self.badgeView increment];
-    }
-}
-
-- (void)decrement {
-    if (self.badgeView.badgeValue == 10000) {
-        [self.badgeView setBadgeValue:1005];
-    }
-
-    if (self.badgeView.badgeValue == 1000) {
-        [self.badgeView setBadgeValue:105];
-    }
-
-    else if (self.badgeView.badgeValue == 100) {
-        [self.badgeView setBadgeValue:99];
-    }
-
-    else if (self.badgeView.badgeValue == 95) {
-        [self.badgeView setBadgeValue:5];
-    }
-
-    else {
-        [self.badgeView decrement];
-    }
-}
+//- (void)increment {
+//    if ([self.badgeView.badgeValue isEqual: @"5"]) {
+//        [self.badgeView setBadgeValue:@"10"];
+//    }
+//
+//    else if ([self.badgeView.badgeValue isEqual: @"15"]) {
+//        [self.badgeView setBadgeValue:@"100"];
+//    }
+//
+//    else if ([self.badgeView.badgeValue isEqual: @"105"]) {
+//        [self.badgeView setBadgeValue:@"1000"];
+//    }
+//
+//    else if ([self.badgeView.badgeValue isEqual: @"1005"]) {
+//        [self.badgeView setBadgeValue:@"10000"];
+//    }
+//
+//    else {
+//        [self.badgeView increment];
+//    }
+//}
+//
+//- (void)decrement {
+//    if (self.badgeView.badgeValue == 10000) {
+//        [self.badgeView setBadgeValue:1005];
+//    }
+//
+//    if (self.badgeView.badgeValue == 1000) {
+//        [self.badgeView setBadgeValue:105];
+//    }
+//
+//    else if (self.badgeView.badgeValue == 100) {
+//        [self.badgeView setBadgeValue:99];
+//    }
+//
+//    else if (self.badgeView.badgeValue == 95) {
+//        [self.badgeView setBadgeValue:5];
+//    }
+//
+//    else {
+//        [self.badgeView decrement];
+//    }
+//}
 
 @end

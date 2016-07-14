@@ -15,7 +15,6 @@ static CGFloat const kBadgeViewDefaultFontSize = 12.0;
 @interface GIBadgeView ()
 
 @property (nonatomic, strong) UILabel *valueLabel;
-@property (nonatomic, strong) NSNumberFormatter *formatter;
 
 @end
 
@@ -38,10 +37,6 @@ static CGFloat const kBadgeViewDefaultFontSize = 12.0;
 }
 
 - (void)commonInit {
-    self.formatter = [NSNumberFormatter new];
-    self.formatter.groupingSeparator = @",";
-    self.formatter.usesGroupingSeparator = YES;
-
     [self setupDefaultAppearance];
 }
 
@@ -119,40 +114,10 @@ static CGFloat const kBadgeViewDefaultFontSize = 12.0;
 
 #pragma mark - Updating the badge value
 
-- (void)increment {
-    self.badgeValue++;
-}
-
-- (void)decrement {
-    self.badgeValue--;
-}
-
-- (void)setBadgeValue:(NSInteger)badgeValue {
-    // No-op if we're given zero or less and our current badge value is zero,
-    // meaning we're hidden anyway.
-    //
-    if (badgeValue <= 0 && self.badgeValue == 0) {
-        return;
-    }
-
-    // If we're given a negative number and our badge value is a positive number,
-    // treat this like we're setting it to zero.
-    //
-    if (badgeValue < 0 && self.badgeValue > 0) {
-        badgeValue = 0;
-    }
-
-    // Save the new badge value now that we've sanitized it.
-    //
+- (void)setBadgeValue:(NSString *)badgeValue {
     _badgeValue = badgeValue;
 
-    // If the badge value is larger than zero, let's update the label. The reason
-    // for this is that it looks weird when the label changes to 0 and then animates
-    // away. It makes more sense for it to simply disappear.
-    //
-    if (badgeValue > 0) {
-        self.valueLabel.text = [self.formatter stringFromNumber:@(badgeValue)];
-    }
+    self.valueLabel.text = badgeValue;
 
     // Update our state.
     //
@@ -165,17 +130,19 @@ static CGFloat const kBadgeViewDefaultFontSize = 12.0;
 - (void)updateState {
     // If we're currently hidden and we should be visible, show ourself.
     //
-    if (self.isHidden && self.badgeValue > 0) {
+    BOOL isEmpty = [self.badgeValue isEqualToString:@""] || self.badgeValue == nil;
+    
+    if (self.isHidden && !isEmpty) {
         [self layoutBadgeSubviews];
         [self show];
     }
-
+    
     // Otherwise if we're visible and we shouldn't be, hide ourself.
     //
-    else if (!self.isHidden && self.badgeValue <= 0) {
+    else if (!self.isHidden && isEmpty) {
         [self hide];
     }
-
+    
     // Otherwise update the subviews.
     //
     else {
